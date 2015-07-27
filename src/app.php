@@ -82,9 +82,14 @@ $app->match('/add', function (Request $request) use ($app) {
             $alert = array('type' => 'error', 'message' => 'Sorry, there was a problem uploading your photo.');
         }
     }
-    return $app['twig']->render('add.twig', array(
+    $app['twig']->render('add.twig', array(
         'title' => 'Share a New Photo!',
         'alert' => $alert,
     ));
+	
+	$arr = array('success' => true, 'imageId' => $pictureCounter);
+	
+	return json_encode($arr);
+	
 });
 $app->run();
