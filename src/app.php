@@ -8,6 +8,10 @@ use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+
+static $pictureCounter = 0;
+static $picturemap = array();
+
 // Setup the application
 $app = new Application();
 $app->register(new TwigServiceProvider, array(
@@ -59,6 +63,9 @@ $app->match('/add', function (Request $request) use ($app) {
                 'Body'   => fopen($file->getPathname(), 'r'),
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
+			
+			$picturemap[$key] = $pictureCounter++;
+			
             // Save the photo record to the database
             $query = $app['db']->prepare("INSERT INTO {$app['db.table']} (url, caption) VALUES (:url, :caption)");
             $data = array(
