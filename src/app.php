@@ -47,7 +47,7 @@ $app->match('/add', function (Request $request) use ($app) {
 			
 			//make sure the file has a .jpg extension
 			echo "<script type='text/javascript'>alert($file->getExtension())</script>";
-			//echo "<script type='text/javascript'>alert('this is a test')</script>";
+			echo "<script type='text/javascript'>alert('this is a test')</script>";
 			
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
