@@ -85,8 +85,7 @@ $app->match('/add', function (Request $request) use ($app) {
     return $app['twig']->render('add.twig', array(
         'title' => 'Share a New Photo!',
         'alert' => $alert,
-    ),
-	 json_encode(array('success' => true, 'imageId' => $pictureCounter))
-	);
+		'result' => json_encode(array('success' => true, 'imageId' => $pictureCounter))
+    ));
 });
 $app->run();
