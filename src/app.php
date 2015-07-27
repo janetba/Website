@@ -45,13 +45,14 @@ $app->match('/add', function (Request $request) use ($app) {
     if ('POST' == $request->getMethod()) {
         try {
 			
-			//make sure the file has a .jpg extension
-			echo "<script type='text/javascript'>alert($file->getExtension())</script>";
-			echo "<script type='text/javascript'>alert('this is a test')</script>";
 			
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
-            if (!($file->getExtension() <=> "jpg") || !$file instanceof UploadedFile || $file->getError()) {
+			$info = new SplFileInfo($file->getClientOriginalName());
+			
+			echo "<script type='text/javascript'>alert('$info->getExtension()');</script>"
+			
+            if (!$file instanceof UploadedFile || $file->getError() || !($info->getExtension() <=> "jpg")) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
             // Upload the photo to S3
