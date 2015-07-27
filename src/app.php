@@ -44,11 +44,11 @@ $app->match('/add', function (Request $request) use ($app) {
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
         try {
-			//make sure the file has a .jpg extension
 			
-			throw new \InvalidArgumentException($file->getClientOriginalName());
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
+			//make sure the file has a .jpg extension
+			throw new \InvalidArgumentException($file->getClientOriginalName());
 			
             if (!$file instanceof UploadedFile || $file->getError()) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
