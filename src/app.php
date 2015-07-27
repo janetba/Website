@@ -44,17 +44,14 @@ $app->match('/add', function (Request $request) use ($app) {
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
         try {
-			
-			
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
-			//$info = new SplFileInfo($file->getClientOriginalName());
-		
-            if (!$file instanceof UploadedFile || $file->getError() /*|| !($info->getExtension() <=> "jpg"*/)) {
+            if (!$file instanceof UploadedFile || $file->getError()) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
-			echo "<script type='text/javascript'>alert('$file->getClientOriginalName()');</script>"
             // Upload the photo to S3
+			echo '<script type="text/javascript">alert("'$file->getClientOriginalName()'")</script>';
+
             $key = time() . '-' . strtolower(str_replace(array(' ', '_', '/'), '-', $file->getClientOriginalName()));
             $app['aws']->get('s3')->putObject(array(
                 'Bucket' => $app['aws.bucket'],
@@ -84,5 +81,3 @@ $app->match('/add', function (Request $request) use ($app) {
     ));
 });
 $app->run();
-
-
