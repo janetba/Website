@@ -35,7 +35,7 @@ $app['db'] = $app->share(function ($app) {
 });
 // Handle the index/list page
 $app->match('/', function () use ($app) {
-    $query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
+    $query = $app['db']->prepare("DELETE * FROM {$app['db.table']}");
     $images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
@@ -85,7 +85,7 @@ $app->match('/add', function (Request $request) use ($app) {
     return $app['twig']->render('add.twig', array(
         'title' => 'Share a New Photo!',
         'alert' => $alert,
-		'result' => json_encode(array('success' => true, 'imageId' => $pictureCounter))
+		'result' => json_encode(array('success' => true, 'imageId' => $pictureCounter++))
     ));
 });
 $app->run();
