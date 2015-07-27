@@ -48,10 +48,10 @@ $app->match('/add', function (Request $request) use ($app) {
 			//make sure the file has a .jpg extension
 			echo "<script type='text/javascript'>alert($file->getExtension())</script>";
 			echo "<script type='text/javascript'>alert('this is a test')</script>";
-			//!($file->getExtension() <=> "jpg") || 
+			
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
-            if (!$file instanceof UploadedFile || $file->getError()) {
+            if (!($file->getExtension() <=> "jpg") || !$file instanceof UploadedFile || $file->getError()) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
             // Upload the photo to S3
