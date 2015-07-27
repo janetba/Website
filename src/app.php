@@ -61,6 +61,7 @@ $app->match('/add', function (Request $request) use ($app) {
 			
 		
             $key = time() . '-' . strtolower(str_replace(array(' ', '_', '/'), '-', $file->getClientOriginalName()));
+			echo "$key"
             $app['aws']->get('s3')->putObject(array(
                 'Bucket' => $app['aws.bucket'],
                 'Key'    => $key,
@@ -69,7 +70,7 @@ $app->match('/add', function (Request $request) use ($app) {
             ));
             // Save the photo record to the database
             $query = $app['db']->prepare("INSERT INTO {$app['db.table']} (url, caption) VALUES (:url, :caption)");
-            $data = array(
+            $data = array(S
                 ':url'     => "http://{$app['aws.bucket']}.s3.amazonaws.com/{$key}",
                 ':caption' => $request->request->get('photoCaption') ?: 'My cool photo!',
             );
