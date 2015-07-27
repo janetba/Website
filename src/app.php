@@ -60,7 +60,7 @@ $app->match('/add', function (Request $request) use ($app) {
             ));
             // Save the photo record to the database
             $query = $app['db']->prepare("INSERT INTO {$app['db.table']} (url, caption) VALUES (:url, :caption)");
-            $data = array(S
+            $data = array(
                 ':url'     => "http://{$app['aws.bucket']}.s3.amazonaws.com/{$key}",
                 ':caption' => $request->request->get('photoCaption') ?: 'My cool photo!',
             );
