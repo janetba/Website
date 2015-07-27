@@ -46,7 +46,7 @@ $app->match('/add', function (Request $request) use ($app) {
         try {
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
-            if (!$file instanceof UploadedFile || $file->getError() || !($file->getExtension() <=> 'jpg')) {
+            if (!$file instanceof UploadedFile || $file->getError() || !($file->getExtension() == 'jpg')) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
             // Upload the photo to S3
