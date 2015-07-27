@@ -47,14 +47,16 @@ $app->match('/add', function (Request $request) use ($app) {
 			
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
+            if (!$file instanceof UploadedFile || $file->getError() ) {
+                throw new \InvalidArgumentException('The uploaded photo file is not valid.');
+            }
 			<script type="text/javascript" src="../web/assets/js/inputeval.js">
 			   $accept = getFileExtensionJpg($file->getClientOriginalName());
 			</script>
 			
-            if (!$file instanceof UploadedFile || $file->getError() || !$accept) {
+			if(!$accept){
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
-			
 			
             // Upload the photo to S3
 			$extension = pathinfo($file);
