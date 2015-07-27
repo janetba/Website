@@ -1,29 +1,3 @@
-
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Gist
-
-    @janetba
-
-You don’t have any verified emails. We recommend verifying at least one email.
-
-Email verification helps our support team verify ownership if you lose account access and allows you to receive all the notifications you ask for.
-
-28
-12
-
-    16
-
-awslabs/opsworks-demo-php-photo-share-app
-
-opsworks-demo-php-photo-share-app/src/app.php
-@jeremeamia jeremeamia on Feb 14, 2013 Initial commit for the photo share app
-
-1 contributor
-96 lines (81 sloc) 3.395 kB
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../db-connect.php';
@@ -70,9 +44,14 @@ $app->match('/add', function (Request $request) use ($app) {
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
         try {
+			
+			//make sure the file has a .jpg extension
+			echo "<script type='text/javascript'>alert($file->getExtension())</script>";
+			//echo "<script type='text/javascript'>alert('this is a test')</script>";
+			
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
-            if (!$file instanceof UploadedFile || $file->getError()) {
+            if (!($file->getExtension() <=> "jpg") || !$file instanceof UploadedFile || $file->getError()) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
             // Upload the photo to S3
