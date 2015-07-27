@@ -48,7 +48,8 @@ $app->match('/add', function (Request $request) use ($app) {
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
 			//make sure the file has a .jpg extension
-			throw new \InvalidArgumentException($file->getClientOriginalName());
+			echo "<script type='text/javascript'>alert($file->getClientOriginalName())</script>";
+			echo "<script type='text/javascript'>alert('this is a test')</script>";
 			
             if (!$file instanceof UploadedFile || $file->getError()) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
