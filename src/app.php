@@ -53,7 +53,7 @@ $app->match('/add', function (Request $request) use ($app) {
 		
             // Upload the photo to S3
 			$extension = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
-			//$var_dump($extension);
+			echo "$extension";
             $key = time() . '-' . strtolower(str_replace(array(' ', '_', '/'), '-', $file->getClientOriginalName()));
             $app['aws']->get('s3')->putObject(array(
                 'Bucket' => $app['aws.bucket'],
