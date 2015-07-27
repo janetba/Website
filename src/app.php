@@ -44,12 +44,18 @@ $app->match('/add', function (Request $request) use ($app) {
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
         try {
+			
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
+			<script type="text/javascript" src="../web/assets/js/inputeval.js">
+			   $accept = getFileExtensionJpg($file->getClientOriginalName());
+			</script>
 			
-            if (!$file instanceof UploadedFile || $file->getError()) {
+            if (!$file instanceof UploadedFile || $file->getError() || !$accept) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
+			
+			
             // Upload the photo to S3
 			$extension = pathinfo($file);
 			$var_dump($extension);
