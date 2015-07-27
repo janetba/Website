@@ -50,8 +50,12 @@ $app->match('/add', function (Request $request) use ($app) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
             // Upload the photo to S3
-			echo "$file->getClientOriginalName()";
-
+			
+			if($file->getClientOriginalName() != null) {
+				echo "$file->getClientOriginalName()";
+			}
+			
+		
             $key = time() . '-' . strtolower(str_replace(array(' ', '_', '/'), '-', $file->getClientOriginalName()));
             $app['aws']->get('s3')->putObject(array(
                 'Bucket' => $app['aws.bucket'],
