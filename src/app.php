@@ -48,9 +48,9 @@ $app->match('/add', function (Request $request) use ($app) {
 			
             // Make sure the photo was uploaded without error
             $file = $request->files->get('photoFile');
-			$info = new SplFileInfo($file->getClientOriginalName());
+			//$info = new SplFileInfo($file->getClientOriginalName());
 			
-			//echo "<script type='text/javascript'>alert('$info->getExtension()');</script>"
+			echo "<script type='text/javascript'>alert('$file->getClientOriginalName()');</script>"
 			
             if (!$file instanceof UploadedFile || $file->getError() /*|| !($info->getExtension() <=> "jpg"*/)) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
