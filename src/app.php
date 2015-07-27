@@ -50,15 +50,10 @@ $app->match('/add', function (Request $request) use ($app) {
             if (!$file instanceof UploadedFile || $file->getError() ) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
-			<script type="text/javascript" src="../web/assets/js/inputeval.js">
-			   $accept = getFileExtensionJpg($file->getClientOriginalName());
-			</script>
-			
-			if(!$accept){
-                throw new \InvalidArgumentException('The uploaded photo file is not valid.');
-            }
-			
+		
             // Upload the photo to S3
+			$extension = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+			$var_dump($extension);
             $key = time() . '-' . strtolower(str_replace(array(' ', '_', '/'), '-', $file->getClientOriginalName()));
             $app['aws']->get('s3')->putObject(array(
                 'Bucket' => $app['aws.bucket'],
