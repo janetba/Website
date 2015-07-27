@@ -54,6 +54,10 @@ $app->match('/add', function (Request $request) use ($app) {
 			if($file->getClientOriginalName() != null) {
 				echo "$file->getClientOriginalName()";
 			}
+			else{
+				echo "empty";
+			}
+				
 			
 		
             $key = time() . '-' . strtolower(str_replace(array(' ', '_', '/'), '-', $file->getClientOriginalName()));
