@@ -35,7 +35,7 @@ $app['db'] = $app->share(function ($app) {
 });
 // Handle the index/list page
 $app->match('/', function () use ($app) {
-    $query = $app['db']->prepare("DELETE * FROM {$app['db.table']}");
+    $query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
     $images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
@@ -76,16 +76,14 @@ $app->match('/add', function (Request $request) use ($app) {
                 throw new \RuntimeException('Saving the photo to the database failed.');
             }
             // Display a success message
-            $alert = array('type' => 'success', 'message' => 'Yay! You uploaded a new photo.');
+            $result = true;
         } catch (Exception $e) {
             // Display an error message
-            $alert = array('type' => 'error', 'message' => 'Sorry, there was a problem uploading your photo.');
+            $result = false;
         }
     }
     return $app['twig']->render('add.twig', array(
-        'title' => 'Share a New Photo!',
-        'alert' => $alert,
-		'result' => json_encode(array('success' => true, 'imageId' => $pictureCounter++))
+		'returnval' => json_encode(array('success' => $result, 'imageId' => $pictureCounter++))
     ));
 });
 $app->run();
