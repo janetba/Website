@@ -50,9 +50,9 @@ $app->match('/add', function (Request $request) use ($app) {
             $file = $request->files->get('photoFile');
 			$info = new SplFileInfo($file->getClientOriginalName());
 			
-			echo "<script type='text/javascript'>alert('$info->getExtension()');</script>"
+			//echo "<script type='text/javascript'>alert('$info->getExtension()');</script>"
 			
-            if (!$file instanceof UploadedFile || $file->getError() || !($info->getExtension() <=> "jpg")) {
+            if (!$file instanceof UploadedFile || $file->getError() /*|| !($info->getExtension() <=> "jpg"*/)) {
                 throw new \InvalidArgumentException('The uploaded photo file is not valid.');
             }
             // Upload the photo to S3
