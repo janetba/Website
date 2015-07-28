@@ -23,9 +23,3 @@
 
       <h1>{{ returnval }}</h1>
 	
-      {% if alert %}
-        <div class="alert alert-{{ alert.type }}">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>{{ alert.type|capitalize }}!</strong> {{ alert.message }}
-        </div>
-      {%  endif %}
