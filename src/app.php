@@ -46,7 +46,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			}
 			
 			$pictureKey = $picturemap[$file->getClientOriginalName()];
-			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url == $pictureKey");
+			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 		}
 		catch (Exception $e) {
