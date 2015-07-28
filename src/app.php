@@ -60,7 +60,7 @@ $app->match('/get', function (Request $request) use ($app) {
 		}
 		catch (Exception $e) {
             // Display an error message
-            throw new \RuntimeException('Saving the photo to the database failed.');
+            echo "there was an exception $e";
         }
 	}
 	else
