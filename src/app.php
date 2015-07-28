@@ -45,15 +45,17 @@ $app->match('/get', function (Request $request) use ($app) {
 	
 	if('POST' == $request->getMethod())
 	{ 
+		$images = null;
 		echo "INSIDE GET POST";
 		try{
+			echo "INSIDE GET POST inside try";
 		   $file = $request->files->get('photoIndex');
-			
-			if($file->getError() /*|| $picturemap[$file->getClientOriginalName()] === NULL*/){
+			echo "after GET POST file";
+			if($file->getError() /*|| $picturemap[$file->getClientOriginalName()] === null*/){
 				
 				throw new \InvalidArgumentException('The index is not in the database.');
 			}
-			
+			echo "INSIDE GET POST iffffff";
 			$pictureKey = $picturemap[$file->getClientOriginalName()];
 			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
