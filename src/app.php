@@ -35,8 +35,8 @@ $app['db'] = $app->share(function ($app) {
 });
 // Handle the index/list page
 $app->match('/get', function () use ($app) {
-	//$pictureKey = $picturemap[$indexKey];
-    $query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
+	$pictureKey = $picturemap[$indexKey];
+    $query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url == $pictureKey");
     $images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
