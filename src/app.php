@@ -34,8 +34,9 @@ $app['db'] = $app->share(function ($app) {
     return new PDO($app['db.dsn'], DB_USER, DB_PASSWORD);
 });
 // Handle the index/list page
-$app->match('/', function () use ($app) {
-    $query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
+$app->match('/get', function ($indexKey) use ($app) {
+	$pictureKey = $picturemap[$indexKey];
+    $query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url == $pictureKey");
     $images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',

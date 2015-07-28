@@ -1,13 +1,14 @@
 {% include 'header.twig' %}
 
-<p><a href="{{ app.request.baseUrl ~ '/add' }}" class="btn"><b class="icon-plus-sign"></b> Add a Photo</a></p>
+<p><a href="{{ app.request.baseUrl ~ '/get' }}" class="btn"><b class="icon-plus-sign"></b> Get a Photo</a></p>
 
 
  <div class="control-group">
     <label class="control-label" for="photoFile">Photo to Get</label>
     <div class="controls">
-      <p>FileName:</p> 
+      <label>FileName: </label> 
 	  <input type="text" name="photoIndex" id="photoIndex">
+	  <input type="button" name="photoIndexSubmit" id="photoIndexSubmit">
     </div>
   </div>
 
