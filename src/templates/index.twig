@@ -1,17 +1,19 @@
 {% include 'header.twig' %}
 
-<p><a href="{{ app.request.baseUrl ~ '/get' }}" class="btn"><b class="icon-plus-sign"></b> Get a Photo</a></p>
 
+{% if data %}<pre>{{ data }}</pre>{%  endif %}
+<form action="{{ app.request.baseUrl ~ '/get' }}" method="post" class="form-horizontal" enctype="multipart/form-data">
 
  <div class="control-group">
     <label class="control-label" for="photoFile">Photo to Get</label>
     <div class="controls">
       <label>FileName: </label> 
 	  <input type="text" name="photoIndex" id="photoIndex">
-	  <input type="button" name="photoIndexSubmit" id="photoIndexSubmit">
+	  <button type="submit" class="btn btn-primary"><b class="icon-ok icon-white"></b> Retrieve Photo</button>
     </div>
   </div>
-
+ </form>
+  
 <!-- div class="row-fluid">
     {%  for image in images %}
         <div class="uploaded-image">
