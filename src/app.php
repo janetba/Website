@@ -55,14 +55,14 @@ $app->match('/get', function (Request $request) use ($app) {
 				throw new \InvalidArgumentException('The index is not in the database.');
 			}
 			
-			$pictureKey = $picturemap[$file->getClientOriginalName()];
+			//$pictureKey = $picturemap[$file->getClientOriginalName()];
 			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 			
 			return $app['twig']->render('display.twig', array(
 			'title'  => 'My Photos',
 			'images' => $images,
-     ));
+     ), "oajfakjdlsd");
 		}
 		catch (Exception $e) {
             // Display an error message
