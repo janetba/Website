@@ -1,5 +1,7 @@
 {% include 'header.twig' %}
 
+<p><a href="{{ app.request.baseUrl ~ '/add' }}" class="btn"><b class="icon-plus-sign"></b> Add a Photo</a></p>
+
 {% if data %}<pre>{{ data }}</pre>{%  endif %}
 
 <form action="{{ app.request.baseUrl ~ '/get' }}" method="post" class="form-horizontal" enctype="multipart/form-data" >
