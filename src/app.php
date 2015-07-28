@@ -34,10 +34,26 @@ $app['db'] = $app->share(function ($app) {
     return new PDO($app['db.dsn'], DB_USER, DB_PASSWORD);
 });
 // Handle the index/list page
-$app->match('/get', function () use ($app) {
-	$pictureKey = $picturemap[$indexKey];
-    $query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url == $pictureKey");
-    $images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
+$app->match('/get', function (Request $request) use ($app) {
+	if('POST' == $request->getMethod())
+	{
+		try{
+			$file = $request->text->get('photoIndex');
+			
+			if($file->getError() || $picturemap[$file->getClientOriginalName()] === NULL){
+				
+				throw new \InvalidArgumentException('The index is not in the database.');
+			}
+			
+			$pictureKey = $picturemap[$file->getClientOriginalName()];
+			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url == $pictureKey");
+			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
+		}
+		catch (Exception $e) {
+            // Display an error message
+            $result = false;
+        }
+	}
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
         'images' => $images,
