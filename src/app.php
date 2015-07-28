@@ -34,7 +34,7 @@ $app['db'] = $app->share(function ($app) {
     return new PDO($app['db.dsn'], DB_USER, DB_PASSWORD);
 });
 // Handle the index/list page
-$app->match('/get', function () use ($app) {
+$app->match('/', function () use ($app) {
 	//$pictureKey = $picturemap[$indexKey];
     $query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
     $images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
