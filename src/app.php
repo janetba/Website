@@ -35,6 +35,8 @@ $app['db'] = $app->share(function ($app) {
 });
 // Handle the index/list page
 $app->match('/get', function (Request $request) use ($app) {
+	$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
+	$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 	if('POST' == $request->getMethod())
 	{ 
 		try{
