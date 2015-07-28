@@ -36,23 +36,23 @@ $app['db'] = $app->share(function ($app) {
 // Handle the index/list page
 $app->match('/get', function (Request $request) use ($app) {
 	if('POST' == $request->getMethod())
-	{ /*
+	{ 
 		try{
-			$file = $request->text->get('photoIndex');
+			/*$file = $request->text->get('photoIndex');
 			
 			if($file->getError() || $picturemap[$file->getClientOriginalName()] === NULL){
 				
 				throw new \InvalidArgumentException('The index is not in the database.');
 			}
 			
-			$pictureKey = $picturemap[$file->getClientOriginalName()];
+			$pictureKey = $picturemap[$file->getClientOriginalName()];*/
 			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 		}
 		catch (Exception $e) {
             // Display an error message
             $result = false;
-        }*/
+        }
 	}
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
