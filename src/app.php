@@ -58,16 +58,24 @@ $app->match('/get', function (Request $request) use ($app) {
 			$pictureKey = $picturemap[$file->getClientOriginalName()];
 			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
+			
+			return $app['twig']->render('display.twig', array(
+			'title'  => 'My Photos',
+			'images' => $images,
+     ));
 		}
 		catch (Exception $e) {
             // Display an error message
             echo "there was an exception $e";
         }
 	}
-    return $app['twig']->render('display.twig', array(
-        'title'  => 'My Photos',
-        'images' => $images,
-    ));
+	else
+	{
+		return $app['twig']->render('index.twig', array(
+			'title'  => 'My Photos',
+			'images' => $images,
+		));
+	}
 });
 
 // Handle the add/upload page
