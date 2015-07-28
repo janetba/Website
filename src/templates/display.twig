@@ -1,0 +1,15 @@
+{% include 'header.twig' %}
+
+{% if data %}<pre>{{ data }}</pre>{%  endif %}
+<div class="row-fluid">
+    {%  for image in images %}
+        <div class="uploaded-image">
+            <img src="{{ image.url }}" class="img-polaroid">
+            <p class="caption">{{ image.caption }}</p>
+        </div>
+    {%  endfor %}
+</div>
+
+<a href="{{ app.request.baseUrl ~ '/' }}" class="btn"><b class="icon-chevron-left"></b> Go Back</a>
+
+{% include 'footer.twig' %}

@@ -17,6 +17,7 @@ $app = new Application();
 $app->register(new TwigServiceProvider, array(
     'twig.path' => __DIR__ . '/templates',
 ));
+
 // Setup the AWS SDK for PHP
 $app->register(new AwsServiceProvider());
 $app['aws.bucket'] = $app->share(function ($app) {
@@ -46,16 +47,14 @@ $app->match('/get', function (Request $request) use ($app) {
 	if('POST' == $request->getMethod())
 	{ 
 		$images = null;
-		echo "INSIDE GET POST";
 		try{
-			echo "INSIDE GET POST inside try";
+			
 		   $file = $request->files->get('photoIndex');
-			echo "after GET POST file";
-			if($file->getError() /*|| $picturemap[$file->getClientOriginalName()] === null*/){
+			if($file->getError() || $picturemap[$file->getClientOriginalName()] === null){
 				
 				throw new \InvalidArgumentException('The index is not in the database.');
 			}
-			echo "INSIDE GET POST iffffff";
+			
 			$pictureKey = $picturemap[$file->getClientOriginalName()];
 			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
@@ -65,11 +64,7 @@ $app->match('/get', function (Request $request) use ($app) {
             echo "there was an exception $e";
         }
 	}
-	else
-	{
-		echo "failed get ";
-	}
-    return $app['twig']->render('index.twig', array(
+    return $app['twig']->render('display.twig', array(
         'title'  => 'My Photos',
         'images' => $images,
     ));
