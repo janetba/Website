@@ -33,22 +33,20 @@ $app['db.dsn'] = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
 $app['db'] = $app->share(function ($app) {
     return new PDO($app['db.dsn'], DB_USER, DB_PASSWORD);
 });
+
 // Handle the index/list page
 $app->match('/', function () use ($app) {
 	
-    return $app['twig']->render('index.twig'));
+    return $app['twig']->render('start.twig');
 });
-
 
 // Handle the index/list page
 $app->match('/get', function (Request $request) use ($app) {
-	$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
-	$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 	
-	/*if('POST' == $request->getMethod())
+	if('POST' == $request->getMethod())
 	{ 
 		try{
-		   $file = $request->text->get('photoIndex');
+		   $file = $request->files->get('photoIndex');
 			
 			if($file->getError() || $picturemap[$file->getClientOriginalName()] === NULL){
 				
@@ -61,16 +59,14 @@ $app->match('/get', function (Request $request) use ($app) {
 		}
 		catch (Exception $e) {
             // Display an error message
-            $result = false;
+            throw new \RuntimeException('Saving the photo to the database failed.');
         }
-	}*/
+	}
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
         'images' => $images,
     ));
 });
-
-
 
 // Handle the add/upload page
 $app->match('/add', function (Request $request) use ($app) {
