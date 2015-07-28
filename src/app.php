@@ -49,7 +49,7 @@ $app->match('/get', function (Request $request) use ($app) {
 		try{
 		   $file = $request->files->get('photoIndex');
 			
-			if($file->getError() || $picturemap[$file->getClientOriginalName()] === NULL){
+			if($file->getError() /*|| $picturemap[$file->getClientOriginalName()] === NULL*/){
 				
 				throw new \InvalidArgumentException('The index is not in the database.');
 			}
