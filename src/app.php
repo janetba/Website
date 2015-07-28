@@ -37,17 +37,18 @@ $app['db'] = $app->share(function ($app) {
 $app->match('/get', function (Request $request) use ($app) {
 	$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
 	$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
-	if('POST' == $request->getMethod())
+	
+	/*if('POST' == $request->getMethod())
 	{ 
 		try{
-			/*$file = $request->text->get('photoIndex');
+		   $file = $request->text->get('photoIndex');
 			
 			if($file->getError() || $picturemap[$file->getClientOriginalName()] === NULL){
 				
 				throw new \InvalidArgumentException('The index is not in the database.');
 			}
 			
-			$pictureKey = $picturemap[$file->getClientOriginalName()];*/
+			$pictureKey = $picturemap[$file->getClientOriginalName()];
 			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 		}
@@ -55,7 +56,7 @@ $app->match('/get', function (Request $request) use ($app) {
             // Display an error message
             $result = false;
         }
-	}
+	}*/
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
         'images' => $images,
