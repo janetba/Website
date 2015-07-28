@@ -45,6 +45,7 @@ $app->match('/get', function (Request $request) use ($app) {
 	
 	if('POST' == $request->getMethod())
 	{ 
+		echo "INSIDE GET POST";
 		try{
 		   $file = $request->files->get('photoIndex');
 			
@@ -61,6 +62,10 @@ $app->match('/get', function (Request $request) use ($app) {
             // Display an error message
             throw new \RuntimeException('Saving the photo to the database failed.');
         }
+	}
+	else
+	{
+		echo "failed get ";
 	}
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
