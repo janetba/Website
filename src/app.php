@@ -36,7 +36,7 @@ $app['db'] = $app->share(function ($app) {
 // Handle the index/list page
 $app->match('/get', function (Request $request) use ($app) {
 	if('POST' == $request->getMethod())
-	{
+	{ /*
 		try{
 			$file = $request->text->get('photoIndex');
 			
@@ -52,7 +52,7 @@ $app->match('/get', function (Request $request) use ($app) {
 		catch (Exception $e) {
             // Display an error message
             $result = false;
-        }
+        }*/
 	}
     return $app['twig']->render('index.twig', array(
         'title'  => 'My Photos',
