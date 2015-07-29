@@ -28,6 +28,7 @@ $app['aws.bucket'] = $app->share(function ($app) {
     }
     return S3_BUCKET;
 });
+
 // Setup the database
 $app['db.table'] = DB_TABLE;
 $app['db.dsn'] = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
@@ -104,10 +105,13 @@ $app->match('/add', function (Request $request) use ($app) {
                 'Body'   => fopen($file->getPathname(), 'r'),
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
-			
-			$app['pictureCounter'] = {$app['pictureCounter']} + 1; 
+			$counter = $app['pictureCounter']; 
+			echo "counter: $counter  ";
+			$counter++;
+			echo "counter plus 1: $counter";
+			$app['pictureCounter'] = $counter; 
 			echo "picturecounte: ";
-			echo {$app['pictureCounter']};
+			echo $app['pictureCounter'];
 			
 			
             // Save the photo record to the database
