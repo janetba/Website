@@ -36,7 +36,7 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get/{height}/{width}', function (Request $request) use ($app) {
+$app->match('/get/{lengthWidth}', function (Request $request) use ($app) {
 	
 	if('POST' == $request->getMethod())
 	{ 
@@ -78,7 +78,7 @@ $app->match('/get/{height}/{width}', function (Request $request) use ($app) {
 			'images' => $images,
 		));
 	}
-});
+})->assert("lengthWidth", ".*");
 
 // Handle the add/upload page
 $app->match('/add', function (Request $request) use ($app) {
