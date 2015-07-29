@@ -9,7 +9,7 @@ use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
-$GLOBALS['pictureCounter'] = 0;
+$app['pictureCounter'] = 0;
 static $picturemap = array();
 
 // Setup the application
@@ -104,13 +104,10 @@ $app->match('/add', function (Request $request) use ($app) {
                 'Body'   => fopen($file->getPathname(), 'r'),
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
-			$COUNTER = $GLOBALS['pictureCounter'] + 1; 
-			$GLOBALS['pictureCounter'] = 2;
-		    $picturemap[$pictureCounter] = $key;
-			echo "GLOBAL PICTURE COUNTER:     ";
-			echo $GLOBALS['pictureCounter'];
-			echo "random counter thingy: \n";
-			echo $COUNTER;
+			
+			$app['pictureCounter'] = $app['pictureCounter'] + 1; 
+			echo "picturecounte: ";
+			echo $app['pictureCounter'];
 			$getval = $picturemap[0];
 			
 			
