@@ -50,6 +50,7 @@ $app->match('/get', function (Request $request) use ($app) {
 		try{
 			
 		   $file = $request->query->get('photoIndex');
+		   echo "file: $file ";
 		    echo "fileName: $file->getClientOriginalName()";
 			
 			if($file->getError() || $picturemap[$file] === null){
