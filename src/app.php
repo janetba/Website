@@ -36,17 +36,16 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get', function (Request $request) use ($app) {
+$app->match('/get/length={length}&width={width}', function (Request $request) use ($app) {
 	
 	if('POST' == $request->getMethod())
 	{ 
 		$images = null;
 		try{
 			
+			echo "length $length width $width";
 		   $file = $request->request->get('photoIndex');
-          
-            echo "key Retrieved: $file";		  
-			$images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
+		   $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 			
 			return $app['twig']->render('display.twig', array(
 			'title'  => 'My Photos',
