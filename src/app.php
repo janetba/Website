@@ -42,7 +42,7 @@ $app->match('/get/{height}/{width}', function (Request $request) use ($app) {
 	{ 
 		$images = null;
 		try{
-			
+			  
 		    echo "height $height width $width";
 		    $file = $request->request->get('photoIndex');
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
