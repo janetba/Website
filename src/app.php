@@ -60,7 +60,7 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
 			
 			$pictureKey = $picturemap[$file->getClientOriginalName()];
 			echo "picture key $pictureKey";
-			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']}");
+			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url == $pictureKey");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 			
 			return $app['twig']->render('display.twig', array(
@@ -85,7 +85,7 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
 // Handle the add/upload page
 $app->match('/add', function (Request $request) use ($app) {
     $alert = null;
-	
+	$key = null;
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
         try {
@@ -128,7 +128,7 @@ $app->match('/add', function (Request $request) use ($app) {
         }
     }
     return $app['twig']->render('add.twig', array(
-		'returnval' => json_encode(array('success' => $result, 'imageId' => $GLOBALS['pictureCounter']))
+		'returnval' => json_encode(array('success' => $result, 'imageId' => $key))
     ));
 });
 $app->run();
