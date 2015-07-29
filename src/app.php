@@ -83,7 +83,7 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
 });
 
 // Handle the add/upload page
-$app->match('/add', function (Request $request) use ($app, &$pictureCounter, &$picturemap) {
+$app->match('/add', function (Request $request) use ($app) {
     $alert = null;
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
@@ -103,6 +103,9 @@ $app->match('/add', function (Request $request) use ($app, &$pictureCounter, &$p
                 'Body'   => fopen($file->getPathname(), 'r'),
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
+			
+			global $picturemap; 
+			global $pictureCounter;
 			
 		    $picturemap[$pictureCounter] = $key;
 			$pictureCounter += 1;
