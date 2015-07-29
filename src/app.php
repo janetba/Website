@@ -105,9 +105,8 @@ $app->match('/add', function (Request $request) use ($app) {
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
 			
-			$GLOBALS['pictureCounter'] = $pictureCounter + 1;
+			$GLOBALS['pictureCounter'] = $GLOBALS['pictureCounter'] + 1;
 		    $picturemap[$pictureCounter] = $key;
-			$pictureCounter += 1;
 			echo "GLOBAL PICTURE COUNTER:     ";
 			echo $GLOBALS['pictureCounter'];
 			
