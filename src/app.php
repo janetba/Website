@@ -32,11 +32,7 @@ $app['aws.bucket'] = $app->share(function ($app) {
     return S3_BUCKET;
 });
 
-$route = new Route(
-    '/get/{lengthWidth}',
-    array('lengthWidth' => ''),
-    array('lengthWidth' => '.*')
-);
+$route = new Route('/get/{length}',name="_length");
 
 
 
@@ -47,9 +43,10 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get/params?length={length}&width={width}', function (Request $request) use ($app) {
+$app->match('/get/{length}', function (Request $request) use ($app) {
 	echo "  length $length";
-	echo "  width $width";
+	
+	var_dump($request->query->all());
 	
 	if('POST' == $request->getMethod())
 	{
