@@ -51,16 +51,14 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
 			
 		   $file = $request->request->get('photoIndex');
           
-            echo "key Retrieved: $picturemap[$file]";		  
+            echo "key Retrieved: $file";		  
 		 
 			if($file->getError() || $picturemap[$file] === null){
 				
 				throw new \InvalidArgumentException('The index is not in the database.');
 			}
 			
-			$pictureKey = $picturemap[$file->getClientOriginalName()];
-			echo "picture key $pictureKey";
-			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url == $pictureKey");
+			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url == $file");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 			
 			return $app['twig']->render('display.twig', array(
