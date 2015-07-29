@@ -28,12 +28,6 @@ $app['aws.bucket'] = $app->share(function ($app) {
     return S3_BUCKET;
 });
 
-// Setup the database
-$app['db.table'] = DB_TABLE;
-$app['db.dsn'] = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
-$app['db'] = $app->share(function ($app) {
-    return new PDO($app['db.dsn'], DB_USER, DB_PASSWORD);
-});
 
 // Handle the index/list page
 $app->match('/', function () use ($app) {
@@ -42,7 +36,7 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$picturemap) {
+$app->match('/get', function (Request $request) use ($app) {
 	
 	if('POST' == $request->getMethod())
 	{ 
@@ -52,9 +46,7 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
 		   $file = $request->request->get('photoIndex');
           
             echo "key Retrieved: $file";		  
-			$fullName = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
-			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url=$fullName");
-			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
+			$images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 			
 			return $app['twig']->render('display.twig', array(
 			'title'  => 'My Photos',
@@ -98,21 +90,7 @@ $app->match('/add', function (Request $request) use ($app) {
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
 			
-			$GLOBALS['pictureCounter'] = $GLOBALS['pictureCounter'] + 1; 
-		
-			echo "picturecounte: ";
-			echo $GLOBALS['pictureCounter'];
 			
-			
-            // Save the photo record to the database
-            $query = $app['db']->prepare("INSERT INTO {$app['db.table']} (url, caption) VALUES (:url, :caption)");
-            $data = array(
-                ':url'     => "http://{$app['aws.bucket']}.s3.amazonaws.com/{$key}",
-                ':caption' => $request->request->get('photoCaption') ?: 'My cool photo!',
-            );
-            if (!$query->execute($data)) {
-                throw new \RuntimeException('Saving the photo to the database failed.');
-            }
             // Display a success message
             $result = true;
         } catch (Exception $e) {

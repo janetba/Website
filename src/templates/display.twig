@@ -5,12 +5,9 @@
 {% if data %}<pre>{{ data }}</pre>{%  endif %}
 
 <div class="row-fluid">
-    {%  for image in images %}
         <div class="uploaded-image">
-            <img src="{{ image.url }}" class="img-polaroid">
-            <p class="caption">{{ image.caption }}</p>
+            <img src="{{ images }}" class="img-polaroid">
         </div>
-    {%  endfor %}
 </div>
 
 
