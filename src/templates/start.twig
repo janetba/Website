@@ -3,6 +3,6 @@
 {% if data %}<pre>{{ data }}</pre>{%  endif %}
 
 <p><a href="{{ app.request.baseUrl ~ '/add' }}" class="btn"><b class="icon-plus-sign"></b> Add a Photo</a></p>
-<p><a href="{{  path(app.request.baseUrl ~ '/get', {'height': category.id}) }}" class="btn"><b class="icon-plus-sign"></b> Get a Photo</a></p>
+<p><a href="{{  path(app.request.baseUrl ~ '/get', {'_length': category.id}) }}" class="btn"><b class="icon-plus-sign"></b> Get a Photo</a></p>
        
 {% include 'footer.twig' %}   

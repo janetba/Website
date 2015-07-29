@@ -45,6 +45,7 @@ $app->match('/', function () use ($app) {
 // Handle the index/list page
 $app->match('/get/{length}', function (Request $request) use ($app) {
 	echo "  length $length";
+	echo array_merge($request->query->all(), $request->get('_route_params'));
 	
 	var_dump($request->query->all());
 	
