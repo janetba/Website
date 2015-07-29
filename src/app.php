@@ -46,7 +46,7 @@ $app->match('/get/{lengthWidth}', function (Request $request) use ($app) {
 			assert("height", "/[^0-9]/");
 			  
 		    echo "height $height width $width";
-		    $file = $request->request->get('photoIndex');
+		    $file = $request->request->get('photoIndex');  
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 		    $thumb = new Imagick($images);
 		   
