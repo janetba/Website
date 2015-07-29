@@ -104,8 +104,9 @@ $app->match('/add', function (Request $request) use ($app) {
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
 			
-			$picturemap[$pictureCounter++] = $key;
-			echo "store $pictureCounter -1 , $key";
+			global $picturemap[global $pictureCounter++] = $key;
+			$val = global $pictureCounter;
+			echo "store $val -1 , $key";
 			
             // Save the photo record to the database
             $query = $app['db']->prepare("INSERT INTO {$app['db.table']} (url, caption) VALUES (:url, :caption)");
