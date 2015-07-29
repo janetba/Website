@@ -36,14 +36,14 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get/length={length}&width={width}', function (Request $request) use ($app) {
+$app->match('/get/{height}/{width}', function (Request $request) use ($app) {
 	
 	if('POST' == $request->getMethod())
 	{ 
 		$images = null;
 		try{
 			
-			echo "length $length width $width";
+			echo "height $height width $width";
 		   $file = $request->request->get('photoIndex');
 		   $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 			
