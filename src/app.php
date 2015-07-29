@@ -52,8 +52,8 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
 		   $file = $request->request->get('photoIndex');
           
             echo "key Retrieved: $file";		  
-			
-			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url=$file");
+			$fullName = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
+			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url=$fullName");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 			
 			return $app['twig']->render('display.twig', array(
