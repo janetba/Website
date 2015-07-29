@@ -107,8 +107,8 @@ $app->match('/add', function (Request $request) use ($app, $pictureCounter, $pic
 		    $picturemap[$pictureCounter++] = $key;
 			$val = $pictureCounter;
 			$getval = $picturemap[0];
-			echo "store $val -1 , $key";
-			echo "getval $getval";
+			echo "store $val -1 , $key \n";
+			echo "getval $getval   \n";
 			
             // Save the photo record to the database
             $query = $app['db']->prepare("INSERT INTO {$app['db.table']} (url, caption) VALUES (:url, :caption)");
