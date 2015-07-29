@@ -46,6 +46,17 @@ $app->match('/get/{height}/{width}', function (Request $request) use ($app) {
 			echo "height $height width $width";
 		   $file = $request->request->get('photoIndex');
 		   $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
+		   $thumb = new Imagick($images);
+		   
+			//check which is greater height or width
+			if($height > $width)
+			{//force to width
+				$thumb->resizeImage($width,$width,Imagick::FILTER_UNDEFINED,1);
+			}
+			else 
+			{//force to height
+				$thumb->resizeImage($height,$height,Imagick::FILTER_UNDEFINED,1);
+			}
 			
 			return $app['twig']->render('display.twig', array(
 			'title'  => 'My Photos',
