@@ -42,7 +42,7 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get', function (Request $request) use ($app) {
+$app->match('/get', function (Request $request) use ($app, $pictureCounter, $picturemap) {
 	
 	if('POST' == $request->getMethod())
 	{ 
@@ -66,7 +66,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			return $app['twig']->render('display.twig', array(
 			'title'  => 'My Photos',
 			'images' => $images,
-     ), "oajfakjdlsd");
+            ));
 		}
 		catch (Exception $e) {
             // Display an error message
@@ -83,7 +83,7 @@ $app->match('/get', function (Request $request) use ($app) {
 });
 
 // Handle the add/upload page
-$app->match('/add', function (Request $request) use ($app) {
+$app->match('/add', function (Request $request) use ($app, $pictureCounter, $picturemap) {
     $alert = null;
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
@@ -104,8 +104,8 @@ $app->match('/add', function (Request $request) use ($app) {
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
 			
-			global $picturemap[global $pictureCounter++] = $key;
-			$val = global $pictureCounter;
+		    $picturemap[$pictureCounter++] = $key;
+			$val = $pictureCounter;
 			echo "store $val -1 , $key";
 			
             // Save the photo record to the database
