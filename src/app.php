@@ -61,7 +61,7 @@ $app->match('/get/params?length={length}&width={width}', function (Request $requ
 		    echo "height $height width $width";
 		    $file = $request->request->get('photoIndex');  
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
-		    $thumb = new Imagick($images);
+		    $thumb = new Imagick($images);    
 		   
 			//check which is greater height or width
 			if($height > $width)
