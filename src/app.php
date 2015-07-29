@@ -105,10 +105,9 @@ $app->match('/add', function (Request $request) use ($app) {
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
 			
-			$app['pictureCounter'] = $app['pictureCounter'] + 1; 
+			$app['pictureCounter'] = {$app['pictureCounter']} + 1; 
 			echo "picturecounte: ";
-			echo $app['pictureCounter'];
-			$getval = $picturemap[0];
+			echo {$app['pictureCounter']};
 			
 			
             // Save the photo record to the database
