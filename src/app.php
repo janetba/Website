@@ -49,9 +49,9 @@ $app->match('/get', function (Request $request) use ($app) {
 		$images = null;
 		try{
 			
-		   $file = $request->query->get('photoIndex');
+		   $file = $request->request->get('photoIndex');
 		   echo "file: $file ";
-		    echo "fileName: $file->getClientOriginalName()";
+		   echo "fileName: $file->getClientOriginalName()";
 			
 			if($file->getError() || $picturemap[$file] === null){
 				
