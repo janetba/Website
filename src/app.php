@@ -43,7 +43,7 @@ $app->match('/get/{height}/{width}', function (Request $request) use ($app) {
 		$images = null;
 		try{
 			assert("width", "/[^0-9]/");
-			assert("height", "/[^0-9]/")
+			assert("height", "/[^0-9]/");
 			  
 		    echo "height $height width $width";
 		    $file = $request->request->get('photoIndex');
