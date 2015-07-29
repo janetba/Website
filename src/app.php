@@ -104,10 +104,9 @@ $app->match('/add', function (Request $request) use ($app) {
                 'Body'   => fopen($file->getPathname(), 'r'),
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
+			
 			$GLOBALS['pictureCounter'] = $GLOBALS['pictureCounter'] + 1; 
-			echo "counter: $counter  ";
-			$counter++;
-			echo "counter plus 1: $counter";
+		
 			echo "picturecounte: ";
 			echo $GLOBALS['pictureCounter'];
 			
