@@ -104,12 +104,13 @@ $app->match('/add', function (Request $request) use ($app) {
                 'Body'   => fopen($file->getPathname(), 'r'),
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
-			
-			$GLOBALS['pictureCounter'] = $GLOBALS['pictureCounter'] + 1;
+			$COUNTER = $GLOBALS['pictureCounter'] + 1; 
+			$GLOBALS['pictureCounter'] = 2;
 		    $picturemap[$pictureCounter] = $key;
 			echo "GLOBAL PICTURE COUNTER:     ";
 			echo $GLOBALS['pictureCounter'];
-			
+			echo "random counter thingy: \n";
+			echo $COUNTER;
 			$getval = $picturemap[0];
 			
 			
