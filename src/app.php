@@ -53,7 +53,7 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
           
             echo "key Retrieved: $file";		  
 		 
-			if($file->getError() || $picturemap[$file] === null){
+			if($file->getError()){
 				
 				throw new \InvalidArgumentException('The index is not in the database.');
 			}
