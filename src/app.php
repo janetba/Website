@@ -42,7 +42,7 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get', function (Request $request) use ($app) {
+$app->match('/get', function (Request $request) use ($app, $pictureCounter, $picturemap) {
 	
 	if('POST' == $request->getMethod())
 	{ 
