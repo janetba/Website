@@ -104,7 +104,8 @@ $app->match('/add', function (Request $request) use ($app, &$pictureCounter, &$p
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
 			
-		    $picturemap[$pictureCounter++] = $key;
+		    $picturemap[$pictureCounter] = $key;
+			$pictureCounter += 1;
 			var_dump($pictureCounter);
 			$getval = $picturemap[0];
 			
@@ -126,7 +127,7 @@ $app->match('/add', function (Request $request) use ($app, &$pictureCounter, &$p
         }
     }
     return $app['twig']->render('add.twig', array(
-		'returnval' => json_encode(array('success' => $result, 'imageId' => $pictureCounter++))
+		'returnval' => json_encode(array('success' => $result, 'imageId' => $pictureCounter))
     ));
 });
 $app->run();
