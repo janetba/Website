@@ -53,7 +53,7 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
           
             echo "key Retrieved: $file";		  
 			
-			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url = $file");
+			$query = $app['db']->prepare("SELECT url, caption FROM {$app['db.table']} WHERE url=$file");
 			$images = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 			
 			return $app['twig']->render('display.twig', array(
