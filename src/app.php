@@ -42,6 +42,7 @@ $app->match('/get/{lengthWidth}', function (Request $request) use ($app) {
 	{ 
 		$images = null;
 		try{
+			echo "$lengthWidth";
 			assert("width", "/[^0-9]/");
 			assert("height", "/[^0-9]/");
 			  
