@@ -8,6 +8,10 @@ use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
 
 static $picturemap = array();
 
@@ -28,6 +32,13 @@ $app['aws.bucket'] = $app->share(function ($app) {
     return S3_BUCKET;
 });
 
+$route = new Route(
+    '/get/{lengthWidth}',
+    array('lengthWidth' => ''),
+    array('lengthWidth' => '.*')
+);
+
+
 
 // Handle the index/list page
 $app->match('/', function () use ($app) {
@@ -36,16 +47,16 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get/{lengthWidth}', function (Request $request) use ($app) {
-	echo "$lengthWidth";
+$app->match('/get/params?length={length}&width={width}', function (Request $request) use ($app) {
+	echo "  length $length";
+	echo "  width $width";
 	
 	if('POST' == $request->getMethod())
-	{ 
+	{
+		//$this->redirectToRoute('route', ['length' => 'value'], ['witdh' => 'value'])
 		$images = null;
 		try{
-			echo "$lengthWidth";
-			assert("width", "/[^0-9]/");
-			assert("height", "/[^0-9]/");
+			echo "$length";
 			  
 		    echo "height $height width $width";
 		    $file = $request->request->get('photoIndex');  

@@ -2,7 +2,7 @@
 
 {%  if data %}<pre>{{ data }}</pre>{%  endif %}
 
-<p><a href="{{ app.request.baseUrl ~ '/get/{lengthWidth}' }}" class="btn"><b class="icon-plus-sign"></b> Retrieve a Photo</a></p>
+<p><a href="{{ '/get/params?length={length}&width={width}'}}" class="btn"><b class="icon-plus-sign"></b> Retrieve a Photo</a></p>
 
 
 <form action="{{ app.request.baseUrl ~ '/add' }}" method="post" class="form-horizontal" enctype="multipart/form-data">
@@ -15,7 +15,7 @@
   <div class="control-group">
     <label class="control-label" for="photoCaption">Caption</label>
     <div class="controls">
-      <input type="text" name="photoCaption" id="photoCaption" placeholder="e.g. My cool photo!" class="input-xxlarge" maxlength="75">
+      <input type="text" name="photoCaption" id="photoCaptsion" placeholder="e.g. My cool photo!" class="input-xxlarge" maxlength="75">
     </div>
   </div>
   <div class="control-group">
