@@ -83,7 +83,7 @@ $app->match('/get', function (Request $request) use ($app, $pictureCounter, $pic
 });
 
 // Handle the add/upload page
-$app->match('/add', function (Request $request) use ($app) {
+$app->match('/add', function (Request $request) use ($app, $pictureCounter, $picturemap) {
     $alert = null;
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
@@ -106,7 +106,9 @@ $app->match('/add', function (Request $request) use ($app) {
 			
 		    $picturemap[$pictureCounter++] = $key;
 			$val = $pictureCounter;
+			$getval = $picturemap[0];
 			echo "store $val -1 , $key";
+			echo "getval $getval";
 			
             // Save the photo record to the database
             $query = $app['db']->prepare("INSERT INTO {$app['db.table']} (url, caption) VALUES (:url, :caption)");
