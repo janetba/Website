@@ -37,6 +37,7 @@ $app->match('/', function () use ($app) {
 
 // Handle the index/list page
 $app->match('/get/{lengthWidth}', function (Request $request) use ($app) {
+	echo "$lengthWidth";
 	
 	if('POST' == $request->getMethod())
 	{ 
