@@ -57,9 +57,9 @@ $app->match('/get/{height}/{width}', function (Request $request) use ($app) {
 			{//force to height
 				$thumb->resizeImage($height,$height,Imagick::FILTER_UNDEFINED,1);
 			}
-			echo '<img src="data:image/jpg;base64,'.base64_encode($thumb->getImageBlob()).'" alt="" />';`
+			echo '<img src="data:image/jpg;base64,'.base64_encode($thumb->getImageBlob()).'" alt="" />';
 			
-			return $app['twig']->render('display.twig', array(
+			return $app['twig']->render('index.twig', array(
 			'title'  => 'My Photos',
 			'images' => $images,
             ));
