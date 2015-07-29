@@ -108,7 +108,6 @@ $app->match('/add', function (Request $request) use ($app) {
 			echo "counter: $counter  ";
 			$counter++;
 			echo "counter plus 1: $counter";
-			$GLOBALS['pictureCounter'] = $counter; 
 			echo "picturecounte: ";
 			echo $GLOBALS['pictureCounter'];
 			
