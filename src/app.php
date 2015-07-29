@@ -42,7 +42,7 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get', function (Request $request) use ($app, $pictureCounter, $picturemap) {
+$app->match('/get', function (Request $request) use ($app) {
 	
 	if('POST' == $request->getMethod())
 	{ 
@@ -83,7 +83,7 @@ $app->match('/get', function (Request $request) use ($app, $pictureCounter, $pic
 });
 
 // Handle the add/upload page
-$app->match('/add', function (Request $request) use ($app, $pictureCounter, $picturemap) {
+$app->match('/add', function (Request $request) use ($app) {
     $alert = null;
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
