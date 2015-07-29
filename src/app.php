@@ -42,6 +42,8 @@ $app->match('/get/{height}/{width}', function (Request $request) use ($app) {
 	{ 
 		$images = null;
 		try{
+			assert("width", "/[^0-9]/");
+			assert("height", "/[^0-9]/")
 			  
 		    echo "height $height width $width";
 		    $file = $request->request->get('photoIndex');
@@ -59,7 +61,7 @@ $app->match('/get/{height}/{width}', function (Request $request) use ($app) {
 			}
 			echo '<img src="data:image/jpg;base64,'.base64_encode($thumb->getImageBlob()).'" alt="" />';
 			
-			return $app['twig']->render('index.twig', array(
+			return $app['twig']->render('display.twig', array(
 			'title'  => 'My Photos',
 			'images' => $images,
             ));
