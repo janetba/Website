@@ -9,8 +9,8 @@ use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
-static $pictureCounter = 0;
-static $picturemap = array();
+$pictureCounter = 0;
+$picturemap = array();
 
 // Setup the application
 $app = new Application();
