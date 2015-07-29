@@ -49,7 +49,6 @@ $app->match('/get/{length}', function (Request $request) use ($app) {
 	
 	if('POST' == $request->getMethod())
 	{
-		//$this->redirectToRoute('route', ['length' => 'value'], ['witdh' => 'value'])
 		$images = null;
 		try{
 			echo "$length";
