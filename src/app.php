@@ -9,7 +9,7 @@ use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
-static $pictureCounter = 0;
+$GLOBALS['pictureCounter'] = 0;
 static $picturemap = array();
 
 // Setup the application
@@ -85,6 +85,7 @@ $app->match('/get', function (Request $request) use ($app, &$pictureCounter, &$p
 // Handle the add/upload page
 $app->match('/add', function (Request $request) use ($app) {
     $alert = null;
+	
     // If the form was submitted, process the input
     if ('POST' == $request->getMethod()) {
         try {
@@ -104,12 +105,12 @@ $app->match('/add', function (Request $request) use ($app) {
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
 			
-			global $picturemap; 
-			global $pictureCounter;
-			
+			$GLOBALS['pictureCounter'] = $pictureCounter + 1;
 		    $picturemap[$pictureCounter] = $key;
 			$pictureCounter += 1;
-			var_dump($pictureCounter);
+			echo "GLOBAL PICTURE COUNTER:     ";
+			echo $GLOBALS['pictureCounter'];
+			
 			$getval = $picturemap[0];
 			
 			
@@ -130,7 +131,7 @@ $app->match('/add', function (Request $request) use ($app) {
         }
     }
     return $app['twig']->render('add.twig', array(
-		'returnval' => json_encode(array('success' => $result, 'imageId' => $pictureCounter))
+		'returnval' => json_encode(array('success' => $result, 'imageId' => $GLOBALS['pictureCounter']))
     ));
 });
 $app->run();
