@@ -9,7 +9,6 @@ use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
-$app['pictureCounter'] = 0;
 static $picturemap = array();
 
 // Setup the application
@@ -105,13 +104,13 @@ $app->match('/add', function (Request $request) use ($app) {
                 'Body'   => fopen($file->getPathname(), 'r'),
                 'ACL'    => CannedAcl::PUBLIC_READ,
             ));
-			$counter = $app['pictureCounter']; 
+			$GLOBALS['pictureCounter'] = $GLOBALS['pictureCounter'] + 1; 
 			echo "counter: $counter  ";
 			$counter++;
 			echo "counter plus 1: $counter";
-			$app['pictureCounter'] = $counter; 
+			$GLOBALS['pictureCounter'] = $counter; 
 			echo "picturecounte: ";
-			echo $app['pictureCounter'];
+			echo $GLOBALS['pictureCounter'];
 			
 			
             // Save the photo record to the database
