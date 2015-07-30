@@ -46,9 +46,9 @@ $app->match('/get', function (Request $request) use ($app) {
     $router = $this->get('router');
     $routes = $router->getRouteCollection();
 
-    foreach ($routes as $route) {
+    /*foreach ($routes as $route) {
         $this->convertController($route);
-    }
+    }*/
 	
 	return $app['twig']->render('display.twig', array(
 			'routes' => $routes,
