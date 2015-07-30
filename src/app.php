@@ -41,7 +41,7 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get/{length}', function (Request $request) use ($app) {
+$app->match('/get', function (Request $request) use ($app) {
 	
 	 /** @var Router $router */
     $router = $this->get('router');
