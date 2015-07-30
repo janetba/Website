@@ -13,7 +13,6 @@ use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Route;
 
-static $picturemap = array();
 
 // Setup the application
 $app = new Application();
@@ -48,10 +47,14 @@ $app->match('/get', function (Request $request) use ($app) {
     $routes = $router->getRouteCollection();
 
     foreach ($routes as $route) {
-       echo  $this->convertController($route);
+        $this->convertController($route);
     }
 	
-	var_dump($request->query->all());
+	return $app['twig']->render('display.twig', array(
+			'routes' => $routes,
+            ));
+	
+	//var_dump($request->query->all());
 	
 	if('POST' == $request->getMethod())
 	{

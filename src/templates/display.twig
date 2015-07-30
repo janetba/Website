@@ -4,11 +4,20 @@
 
 {% if data %}<pre>{{ data }}</pre>{%  endif %}
 
-<div class="row-fluid">
+<!-- div class="row-fluid">
         <div class="uploaded-image">
             <img src="{{ images }}" class="img-polaroid">
         </div>
-</div>
+</div -->
 
+<table>
+{% for route in routes %}
+    <tr>
+        <td>{{ route.path }}</td>
+        <td>{{ route.methods|length > 0 ? route.methods|join(', ') : 'ANY' }}</td>
+        <td>{{ route.defaults._controller }}</td>
+    </tr>
+{% endfor %}
+</table>
 
 {% include 'footer.twig' %}
