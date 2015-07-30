@@ -81,10 +81,10 @@ $app->match('/get', function (Request $request) use ($app) {
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height);
 			}
 			header("Content-Type:image/jpeg");
-			$images = "data:image/jpg;base64,{{ imagejpeg($thumb)|base64 }}";
-			  
+			$result = imagejpeg($thumb);
+			$images = 'data:image/jpg;base64,".base64_encode($result)."';
             
-			//echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
+			//echo "<img src='data:image/jpg;base64,".base64_encode($result)."' />";
 			
 			return $app['twig']->render('display.twig', array(
 			'title'  => 'My Photos',
