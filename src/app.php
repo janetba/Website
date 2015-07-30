@@ -43,7 +43,7 @@ $app->match('/', function () use ($app) {
 });
 
 // Handle the index/list page
-$app->match('/get/{length}', function (Request $request) use ($app) {
+$app->match('/get/{length}', function (Request $request, $legth) use ($app) {
 	
 	var_dump($request->query->all());
 	
@@ -81,9 +81,9 @@ $app->match('/get/{length}', function (Request $request) use ($app) {
 		return $app['twig']->render('index.twig', array(
 			'title'  => 'My Photos',
 			'images' => $images,
-		));
+		));  
 	}
-});
+})->assert("legth", ".*");
 
 // Handle the add/upload page
 $app->match('/add', function (Request $request) use ($app) {
