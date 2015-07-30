@@ -77,7 +77,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			$contents =  ob_get_contents();
 			ob_end_clean();
             
-			echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
+			//echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
 			
 			return $app['twig']->render('index.twig', array(
 			'title'  => 'My Photos',
