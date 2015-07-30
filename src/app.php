@@ -82,7 +82,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			
 			header('Content-Type: image/jpeg');
 			imagejpeg($thumb);
-			
+			  
             
 			//echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
 			
