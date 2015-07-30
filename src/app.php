@@ -43,12 +43,12 @@ $app->match('/', function () use ($app) {
 $app->match('/get', function (Request $request) use ($app) {
 	
 	 /** @var Router $router */
-    $router = $this->get('router');
-    $routes = $router->getRouteCollection();
+    //$router = $this->get('router');
+    //$routes = $router->getRouteCollection();
 
-    foreach ($routes as $route) {
+    /*foreach ($routes as $route) {
         $this->convertController($route);
-    }
+    }*/
 	
 	return $app['twig']->render('display.twig', array(
 			'routes' => $routes,
@@ -56,7 +56,7 @@ $app->match('/get', function (Request $request) use ($app) {
 	
 	//var_dump($request->query->all());
 	
-	if('POST' == $request->getMethod())
+	/*if('POST' == $request->getMethod())
 	{
 		$images = null;
 		try{
@@ -91,7 +91,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			'title'  => 'My Photos',
 			'images' => $images,
 		));  
-	}
+	}*/
 });
 
 // Handle the add/upload page
