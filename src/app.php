@@ -58,7 +58,7 @@ $app->match('/get', function (Request $request) use ($app) {
 		try{
 		    $file = $request->request->get('photoIndex');  
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
-		    $thumb = new Imagick($images);    
+		   /*  $thumb = new Imagick($images);    
 	         
 			$height = 200;
 			$width = 200;
@@ -70,7 +70,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			else 
 			{//force to height
 				$thumb->resizeImage($height,$height,Imagick::FILTER_UNDEFINED,1);
-			}
+			} */
 			
 			/* ob_start();
 			$thumbnail = $thumb->getImageBlob();
