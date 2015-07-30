@@ -68,22 +68,20 @@ $app->match('/get', function (Request $request) use ($app) {
 			$newwidth = 200;
 			
 			// Load
-            $thumb = imagecreatetruecolor($newwidth, $newheight)or die('magecreatetruecolorfailed');
-			$source = imagecreatefromjpeg($images)  or die('create failed');
+            $thumb = imagecreatetruecolor($newwidth, $newheight);
+			$source = imagecreatefromjpeg($images);
 
 	 		//check which is greater height or width
 			if($newheight > $newwidth)
 			{//force to width
-				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newwidth, $width, $height) or die('imagecopyresized');
+				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newwidth, $width, $height);
 			}
 			else 
 			{//force to height
-				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height) or die('imagecopyresized');
+				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height);
 			}
 			header("Content-Type:image/jpeg");
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', time()).' GMT');
-			header('Content-transfer-encoding: binary'); 
-			imagejpeg($thumb);
+			$images = "data:image/jpg;base64,{{ imagejpeg($thumb)|base64 }}";
 			  
             
 			//echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
