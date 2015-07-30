@@ -58,9 +58,9 @@ $app->match('/get', function (Request $request) use ($app) {
 		try{
 		    $file = $request->request->get('photoIndex');  
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
-		   /*  $thumb = new Imagick($images);    
+		    $thumb = new Imagick($images);    
 	         
-			$height = 200;
+			/*$height = 200;
 			$width = 200;
 	 		//check which is greater height or width
 			if($height > $width)
