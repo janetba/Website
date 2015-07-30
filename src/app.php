@@ -58,24 +58,30 @@ $app->match('/get', function (Request $request) use ($app) {
 		try{
 		    $file = $request->request->get('photoIndex');  
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
-		    $thumb = new Imagick($images);    
+		    
+
+			// Get new sizes
+             list($width, $height) = getimagesize($filename);
 	         
-			/*$height = 200;
-			$width = 200;
+			$newheight = 200;
+			$newwidth = 200;
+			
+			// Load
+            $thumb = imagecreatetruecolor($newwidth, $newheight);
+			$source = imagecreatefromjpeg($filename);
+
 	 		//check which is greater height or width
-			if($height > $width)
+			if($newheight > $newwidth)
 			{//force to width
-				$thumb->resizeImage($width,$width,Imagick::FILTER_UNDEFINED,1);
+				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newwidth, $width, $height);
 			}
 			else 
 			{//force to height
-				$thumb->resizeImage($height,$height,Imagick::FILTER_UNDEFINED,1);
-			} */
+				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height);
+			}
 			
-			/* ob_start();
-			$thumbnail = $thumb->getImageBlob();
-			$contents =  ob_get_contents();
-			ob_end_clean(); */
+			imagejpeg($thumb);
+			
             
 			//echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
 			
