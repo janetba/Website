@@ -72,10 +72,10 @@ $app->match('/get', function (Request $request) use ($app) {
 				$thumb->resizeImage($height,$height,Imagick::FILTER_UNDEFINED,1);
 			}
 			
-			ob_start();
+			/* ob_start();
 			$thumbnail = $thumb->getImageBlob();
 			$contents =  ob_get_contents();
-			ob_end_clean();
+			ob_end_clean(); */
             
 			//echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
 			
