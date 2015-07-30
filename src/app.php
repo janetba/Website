@@ -71,16 +71,16 @@ $app->match('/get', function (Request $request) use ($app) {
 			{//force to height
 				$thumb->resizeImage($height,$height,Imagick::FILTER_UNDEFINED,1);
 			}
-			$images = "data:image/jpg;base64,'.base64_encode($thumb->getImageBlob()).'";
+			//$images = "data:image/jpg;base64,'.base64_encode($thumb->getImageBlob()).'";
 			//echo '<img src="data:image/jpg;base64,'.base64_encode($thumb->getImageBlob()).'" alt="" />';
 			ob_start();
 			$thumbnail = $thumb->getImageBlob();
 			$contents =  ob_get_contents();
 			ob_end_clean();
             $images = 'data:image/jpg;base64,".base64_encode($contents)."';
-			//echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
+			echo "<img src='data:image/jpg;base64,".base64_encode($contents)."' />";
 			
-			return $app['twig']->render('display.twig', array(
+			return $app['twig']->render('index.twig', array(
 			'title'  => 'My Photos',
 			'images' => $images,
             ));
