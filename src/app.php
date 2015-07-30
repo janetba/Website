@@ -59,7 +59,8 @@ $app->match('/get', function (Request $request) use ($app) {
 		    $file = $request->request->get('photoIndex');  
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 		    
-
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL); 
 			// Get new sizes
              list($width, $height) = getimagesize($filename);
 	         
@@ -67,20 +68,21 @@ $app->match('/get', function (Request $request) use ($app) {
 			$newwidth = 200;
 			
 			// Load
-            $thumb = imagecreatetruecolor($newwidth, $newheight);
-			$source = imagecreatefromjpeg($filename);
+            $thumb = imagecreatetruecolor($newwidth, $newheight)or die('magecreatetruecolorfailed');
+			$source = imagecreatefromjpeg($filename)  or die('create failed');
 
 	 		//check which is greater height or width
 			if($newheight > $newwidth)
 			{//force to width
-				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newwidth, $width, $height);
+				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newwidth, $width, $height) or die('imagecopyresized');
 			}
 			else 
 			{//force to height
-				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height);
+				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height) or die('imagecopyresized');
 			}
-			
-			header('Content-Type: image/jpeg');
+			header("Content-Type:image/jpeg");
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s', time()).' GMT');
+			header('Content-transfer-encoding: binary'); 
 			imagejpeg($thumb);
 			  
             
