@@ -83,7 +83,7 @@ $app->match('/get/{length}', function (Request $request, $legth) use ($app) {
 			'images' => $images,
 		));  
 	}
-})->assert("length", ".*");
+});
 
 // Handle the add/upload page
 $app->match('/add', function (Request $request) use ($app) {
