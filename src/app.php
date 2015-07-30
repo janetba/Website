@@ -34,8 +34,6 @@ $app['aws.bucket'] = $app->share(function ($app) {
 
 //$route = new Route('/get/{length}',name="_length");
 
-
-
 // Handle the index/list page
 $app->match('/', function () use ($app) {
 	
@@ -44,6 +42,14 @@ $app->match('/', function () use ($app) {
 
 // Handle the index/list page
 $app->match('/get/{length}', function (Request $request) use ($app) {
+	
+	 /** @var Router $router */
+    $router = $this->get('router');
+    $routes = $router->getRouteCollection();
+
+    foreach ($routes as $route) {
+       echo  $this->convertController($route);
+    }
 	
 	var_dump($request->query->all());
 	
