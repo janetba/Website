@@ -50,10 +50,6 @@ $app->match('/get', function (Request $request) use ($app) {
         $this->convertController($route);
     }*/
 	
-	return $app['twig']->render('display.twig', array(
-			'routes' => $routes,
-            ));
-	
 	//var_dump($request->query->all());
 	
 	if('POST' == $request->getMethod())
