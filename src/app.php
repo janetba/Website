@@ -43,8 +43,8 @@ $app->match('/', function () use ($app) {
 $app->match('/get', function (Request $request) use ($app) {
 	
 	 /** @var Router $router */
-    $router = $this->get('router');
-    $routes = $router->getRouteCollection();
+    //$router = $this->get('router');
+    //$routes = $router->getRouteCollection();
 
     /*foreach ($routes as $route) {
         $this->convertController($route);
@@ -56,15 +56,17 @@ $app->match('/get', function (Request $request) use ($app) {
 	
 	//var_dump($request->query->all());
 	
-	/*if('POST' == $request->getMethod())
+	if('POST' == $request->getMethod())
 	{
 		$images = null;
 		try{
 		    $file = $request->request->get('photoIndex');  
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 		    $thumb = new Imagick($images);    
-		   
-			//check which is greater height or width
+	         
+			$height = 200;
+			$width = 200;
+	 		//check which is greater height or width
 			if($height > $width)
 			{//force to width
 				$thumb->resizeImage($width,$width,Imagick::FILTER_UNDEFINED,1);
@@ -91,7 +93,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			'title'  => 'My Photos',
 			'images' => $images,
 		));  
-	}*/
+	}
 });
 
 // Handle the add/upload page
