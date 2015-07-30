@@ -62,14 +62,14 @@ $app->match('/get', function (Request $request) use ($app) {
             ini_set('display_errors', 1);
             error_reporting(E_ALL); 
 			// Get new sizes
-             list($width, $height) = getimagesize($filename);
+             list($width, $height) = getimagesize($images);
 	         
 			$newheight = 200;
 			$newwidth = 200;
 			
 			// Load
             $thumb = imagecreatetruecolor($newwidth, $newheight)or die('magecreatetruecolorfailed');
-			$source = imagecreatefromjpeg($filename)  or die('create failed');
+			$source = imagecreatefromjpeg($images)  or die('create failed');
 
 	 		//check which is greater height or width
 			if($newheight > $newwidth)
