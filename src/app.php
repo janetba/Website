@@ -32,7 +32,7 @@ $app['aws.bucket'] = $app->share(function ($app) {
     return S3_BUCKET;
 });
 
-$route = new Route('/get/{length}',name="_length");
+//$route = new Route('/get/{length}',name="_length");
 
 
 
@@ -51,9 +51,6 @@ $app->match('/get', function (Request $request) use ($app) {
 	{
 		$images = null;
 		try{
-			echo "$length";
-			  
-		    echo "height $height width $width";
 		    $file = $request->request->get('photoIndex');  
 		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 		    $thumb = new Imagick($images);    
@@ -86,7 +83,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			'images' => $images,
 		));
 	}
-})->assert("lengthWidth", ".*");
+});
 
 // Handle the add/upload page
 $app->match('/add', function (Request $request) use ($app) {
