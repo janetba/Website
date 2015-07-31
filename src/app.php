@@ -61,10 +61,10 @@ $app->match('/get', function (Request $request ) use ($app) {
 			
 			// Get new sizes
              list($width, $height) = getimagesize($images);
-	       
+	        
 			$newheight = $request->get('height') == null ? 200 : $request->get('height');
 			$newwidth = $request->get('width') == null ? 200 : $request->get('width');
-			
+			echo "height: $newheight   width: $newwidth";
 			// Load
             $thumb = imagecreatetruecolor($newwidth, $newheight);
 			$source = imagecreatefromjpeg($images);
