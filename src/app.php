@@ -49,7 +49,7 @@ $app->match('/getstart', function () use ($app) {
 $app->match('/get', function (Request $request ) use ($app) {
 	 
    $urlvar = $request->get('foo');
-		  
+	echo $request->get('bar');
 	echo "get: $urlvar"; 
 	
 	if('POST' == $request->getMethod())
