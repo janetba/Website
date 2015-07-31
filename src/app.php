@@ -64,14 +64,13 @@ $app->match('/get', function (Request $request ) use ($app) {
 	        
 			$newheight = 200; 
 			$newwidth = 200;
-			echo $request->get('height');
-			echo $request->get('width');
-			if($request->get('height') != null){
-				$request->get('height');
+			
+			if($request->get('nheight') != null){
+				$newheight = $request->get('nheight');
 			}
 			
-			if($request->get('width') != null){
-				$request->get('width');
+			if($request->get('nwidth') != null){
+				$newwidth = $request->get('nwidth');
 			}
 			echo "height: $newheight   width: $newwidth";
 			// Load
