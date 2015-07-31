@@ -40,9 +40,6 @@ $app->match('/', function () use ($app) {
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
 	
-    $newheight = $request->get('nheight');
-	$newwidth = $request->get('nwidth');
-	
 	if('POST' == $request->getMethod())
 	{
 		$images = null;
@@ -64,6 +61,9 @@ $app->match('/get', function (Request $request ) use ($app) {
 			
 			// Get new sizes
              list($width, $height) = getimagesize($images);
+			 
+			$newheight = $request->request->get('nheight');
+	        $newwidth = $request->request->get('nwidth');
 	        echo "height: $newheight   width: $newwidth";
 			if($newheight == null){
 				$newheight = 200;
