@@ -64,15 +64,15 @@ $app->match('/get', function (Request $request ) use ($app) {
 	        
 			$newheight = 200; 
 			$newwidth = 200;
-			echo "height: $request->get('nheight')  width: $request->get('nwidth')";
-			if($request->get('nheight') != null){
+			echo $request->get('nheight');
+			/* if($request->get('nheight') != null){
 				$newheight = $request->get('nheight');
 			}
 			
 			if($request->get('nwidth') != null){
 				$newwidth = $request->get('nwidth');
 			}
-			echo "height: $newheight   width: $newwidth";
+			echo "height: $newheight   width: $newwidth"; */
 			// Load
             $thumb = imagecreatetruecolor($newwidth, $newheight);
 			$source = imagecreatefromjpeg($images);
