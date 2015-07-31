@@ -41,7 +41,9 @@ $app->match('/', function () use ($app) {
 $app->match('/get', function (Request $request ) use ($app) {
 	
 	if('POST' == $request->getMethod())
-	{
+	{ 
+        $newheight = $request->get('nheight');
+	    $newwidth = $request->get('nwidth');
 		$images = null;
 		try{
 		    $file = $request->request->get('photoIndex');  
@@ -62,8 +64,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 			// Get new sizes
              list($width, $height) = getimagesize($images);
 			 
-			$newheight = $request->request->get('nheight');
-	        $newwidth = $request->request->get('nwidth');
+		    global $newheight, $newwidth;
 			
 	        echo "h: $newheight   w: $newwidth";
 			if($newheight == null){
