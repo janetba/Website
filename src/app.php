@@ -40,7 +40,7 @@ $app->match('/', function () use ($app) {
 });
 
 //Initial get
-$app->match('/get/', function (Request $request) use ($app) {
+$app->match('/get', function (Request $request) use ($app) {
 
 	return $app['twig']->render('index.twig', array(
 			'title'  => 'My Photos',
@@ -51,18 +51,7 @@ $app->match('/get/', function (Request $request) use ($app) {
 // Handle the index/list page
 $app->match('/get/{length}', function (Request $request) use ($app) {
 	 
-	 echo $length;
-	 
-	 /** @var Router $router */
-    //$router = $this->get('router');
-    //$routes = $router->getRouteCollection();
-
-    /*foreach ($routes as $route) {
-        $this->convertController($route);
-    }*/
-	
-	//var_dump($request->query->all());
-	
+	echo $length;
 	if('POST' == $request->getMethod())
 	{
 		$images = null;
