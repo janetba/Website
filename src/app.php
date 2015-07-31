@@ -50,7 +50,9 @@ $app->match('/get/', function (Request $request) use ($app) {
 
 // Handle the index/list page
 $app->match('/get/{length}', function (Request $request) use ($app) {
-	
+	 
+	 echo $length;
+	 
 	 /** @var Router $router */
     //$router = $this->get('router');
     //$routes = $router->getRouteCollection();
