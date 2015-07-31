@@ -63,13 +63,14 @@ $app->match('/get', function (Request $request ) use ($app) {
             $thumb = imagecreatetruecolor($newwidth, $newheight);
 			$source = imagecreatefromjpeg($images);
 
+
 	 		// check which is greater height or width
 			if($newheight > $newwidth)
 			{//force to width
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newwidth, $width, $height);
 			}
 			else 
-			{// force to height
+			{//force to height
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height);
 			}
 			header("Content-Type:image/jpeg");
