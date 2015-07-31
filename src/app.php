@@ -73,7 +73,8 @@ $app->match('/get', function (Request $request ) use ($app) {
 			{//force to height
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height);
 			}
-			header("Content-Type:image/jpeg");
+			
+			header('Content-Type: image/jpeg');
 			imagejpeg($thumb);
 
 		}
