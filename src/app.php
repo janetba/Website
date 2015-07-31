@@ -86,7 +86,7 @@ $app->match('/get', function (Request $request) use ($app) {
             
 			//echo "<img src='data:image/jpg;base64,".base64_encode($result)."' />";
 			
-			return $app['twig']->render('display.twig', array(
+			return $app['twig']->render('inex.twig', array(
 			'title'  => 'My Photos',
 			'images' => $images,
             ));
