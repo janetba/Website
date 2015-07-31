@@ -58,6 +58,7 @@ $app->match('/get', function (Request $request) use ($app) {
 		    
             ini_set('display_errors', 1);
             error_reporting(E_ALL); 
+			
 			// Get new sizes
              list($width, $height) = getimagesize($images);
 	         
