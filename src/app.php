@@ -31,19 +31,11 @@ $app['aws.bucket'] = $app->share(function ($app) {
     return S3_BUCKET;
 });
 
-//$route = new Route('/get/{length}',name="_length");
-
 // Handle the index/list page
 $app->match('/', function () use ($app) {
 	
     return $app['twig']->render('start.twig');
 });
-
-/* // Initial get
-$app->match('/getstart', function () use ($app) {
-
-	return $app['twig']->render('index.twig', array()); 
-} */  
 
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
