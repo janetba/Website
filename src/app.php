@@ -49,7 +49,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 			
 			$result = $app['aws']->get('s3')->getObject(array(
 							   'Bucket' => $app['aws.bucket'],
-							   'Key'    => $images
+							   'Key'    => $images,
 								));
 
 			if($result == null){
