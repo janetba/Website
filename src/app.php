@@ -64,6 +64,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 			 
 			$newheight = $request->request->get('nheight');
 	        $newwidth = $request->request->get('nwidth');
+			
 	        echo "height: $newheight   width: $newwidth";
 			if($newheight == null){
 				$newheight = 200;
@@ -72,7 +73,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 				$newwidth = 200;
 			}
 			 
-			echo "height: $newheight   width: $newwidth";
+			//echo "height: $newheight   width: $newwidth";
 			// Load
             $thumb = imagecreatetruecolor($newwidth, $newheight);
 			$source = imagecreatefromjpeg($images);
