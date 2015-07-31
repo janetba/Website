@@ -46,7 +46,6 @@ echo  "$newheight  weight";
 		
 	if('POST' == $request->getMethod())
 	{ 
-		$images = null;
 		try{
 		    $file = $request->request->get('photoIndex');  
 			$images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
