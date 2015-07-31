@@ -39,11 +39,11 @@ $app->match('/', function () use ($app) {
     return $app['twig']->render('start.twig');
 });
 
-// Initial get
+/* // Initial get
 $app->match('/getstart', function () use ($app) {
 
 	return $app['twig']->render('index.twig', array()); 
-}
+} */  
 
 // Handle the index/list page
 $app->match('/get', function (Request $request) use ($app) {
