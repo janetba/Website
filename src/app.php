@@ -39,7 +39,7 @@ $app->match('/', function () use ($app) {
 
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
-	
+	echo $request->get('nheight');
 	if('POST' == $request->getMethod())
 	{
 		$images = null;
@@ -64,7 +64,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 	        
 			$newheight = 200; 
 			$newwidth = 200;
-			echo $request->get('nheight');
+			//echo $request->get('nheight');
 			/* if($request->get('nheight') != null){
 				$newheight = $request->get('nheight');
 			}
