@@ -46,9 +46,15 @@ $app->match('/getstart', function () use ($app) {
 } */  
 
 // Handle the index/list page
-$app->match('/get/{length}', function (Request $request , $length) use ($app) {
+$app->match('/get', function (Request $request ) use ($app) {
 	 
-	echo $length;
+   $urlvar =$app->get(
+			'/get',
+		   function () use ($app) {
+			   exit('foo: ' . $app['request']->get('foo'));
+		   }
+		);
+	
 	if('POST' == $request->getMethod())
 	{
 		$images = null;
