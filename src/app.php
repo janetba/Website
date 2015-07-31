@@ -40,11 +40,13 @@ $app->match('/', function () use ($app) {
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
 	
+	 $newheight = $request->get('nheight');
+	 $newwidth = $request->get('nwidth');
+	 echo $newheight;
+		
 	if('POST' == $request->getMethod())
 	{ 
-        $newheight = $request->get('nheight');
-	    $newwidth = $request->get('nwidth');
-		echo $newheight;
+       
 		$images = null;
 		try{
 		    $file = $request->request->get('photoIndex');  
