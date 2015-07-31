@@ -49,15 +49,6 @@ $app->match('/get', function (Request $request ) use ($app) {
 		    $file = $request->request->get('photoIndex');  
 			$images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 			
-			$result = $app['aws']->get('s3')->getObject(array(
-							   'Bucket' => $app['aws.bucket'],
-							   'Key'    => $images,
-								));
-
-			if($result == null){
-				throw new \InvalidArgumentException('The key is not stored in the service.');
-			}
-			
             ini_set('display_errors', 1);
             error_reporting(E_ALL); 
 			
