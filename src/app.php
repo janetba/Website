@@ -65,7 +65,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 
 	 		// check which is greater height or width
 			if($newheight > $newwidth)
-			{// force to width
+			{//force to width
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newwidth, $width, $height);
 			}
 			else 
