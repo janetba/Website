@@ -39,8 +39,8 @@ $app->match('/', function () use ($app) {
     return $app['twig']->render('start.twig');
 });
 
-//Initial get
-$app->match('/get', function (Request $request) use ($app) {
+// Initial get
+$app->match('/getstart', function (Request $request) use ($app) {
 
 	return $app['twig']->render('index.twig', array(
 			'title'  => 'My Photos',
@@ -49,7 +49,7 @@ $app->match('/get', function (Request $request) use ($app) {
 }
 
 // Handle the index/list page
-$app->match('/get/{length}', function (Request $request) use ($app) {
+$app->match('/get/{length}', function (Request $request, $length) use ($app) {
 	 
 	echo $length;
 	if('POST' == $request->getMethod())
