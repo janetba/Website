@@ -53,9 +53,16 @@ $app->match('/get', function (Request $request ) use ($app) {
             ini_set('display_errors', 1);
             error_reporting(E_ALL); 
 			
-			$newheight = 200;
-	        $newwidth = 200;
+			global $newheight, $newwidth;
 			
+	        echo "h: $newheight   w: $newwidth";
+			if($newheight == null){
+				$newheight = 200;
+			}
+			if($newwidth == null){
+				$newwidth = 200;
+			}
+			   
 			// Get new sizes
              list($width, $height) = getimagesize($images);
 			 
