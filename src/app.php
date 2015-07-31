@@ -64,7 +64,8 @@ $app->match('/get', function (Request $request ) use ($app) {
 	        
 			$newheight = 200; 
 			$newwidth = 200;
-			
+			echo $request->get('height');
+			echo $request->get('width');
 			if($request->get('height') != null){
 				$request->get('height');
 			}
