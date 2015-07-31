@@ -64,7 +64,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 			}
 			   
 			// Get new sizes
-             list($width, $height) = getimagesize($images);
+           /*   list($width, $height) = getimagesize($images);
 			 
 			//echo "height: $newheight   width: $newwidth";
 			// Load
@@ -83,7 +83,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 			}
 			
 			header('Content-Type: image/jpeg');
-			imagejpeg($thumb);
+			imagejpeg($thumb); */
 
 		}
 		catch (Exception $e) {
