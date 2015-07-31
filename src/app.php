@@ -54,14 +54,27 @@ $app->match('/get', function (Request $request ) use ($app) {
 			   exit('foo: ' . $app['request']->get('foo'));
 		   }
 		);
+		
+	echo "get: $urlvar"; 
 	
 	if('POST' == $request->getMethod())
 	{
 		$images = null;
 		try{
 		    $file = $request->request->get('photoIndex');  
-		    $images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
+			$images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
+			
+			$result = $app['aws']->get('s3')->getObject(array(
+							   'Bucket' => $app['aws.bucket'],
+							   'Key'    => $images
+								));
+
+			if($images == null){
+				throw new \InvalidArgumentException('The key is not stored in the service.');
+			}
 		    
+		    
+			
             ini_set('display_errors', 1);
             error_reporting(E_ALL); 
 			
