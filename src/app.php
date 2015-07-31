@@ -52,7 +52,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 							   'Key'    => $images
 								));
 
-			if($images == null){
+			if($result == null){
 				throw new \InvalidArgumentException('The key is not stored in the service.');
 			}
 			
