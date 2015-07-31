@@ -48,12 +48,7 @@ $app->match('/getstart', function () use ($app) {
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
 	 
-   $urlvar =$app->get(
-			'/get',
-		   function () use ($app) {
-			   exit('foo: ' . $app['request']->get('foo'));
-		   }
-		);
+   $urlvar = $request->get('foo');
 		  
 	echo "get: $urlvar"; 
 	
