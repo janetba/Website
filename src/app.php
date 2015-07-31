@@ -47,10 +47,6 @@ $app->match('/getstart', function () use ($app) {
 
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
-	 
-   $urlvar = $request->get('foo');
-	echo $request->get('bar');
-	echo "get: $urlvar"; 
 	
 	if('POST' == $request->getMethod())
 	{
@@ -75,9 +71,9 @@ $app->match('/get', function (Request $request ) use ($app) {
 			
 			// Get new sizes
              list($width, $height) = getimagesize($images);
-	         
-			$newheight = 200;
-			$newwidth = 200;
+	       
+			$newheight = $request->get('height') == null ? 200 : $request->get('height');
+			$newwidth = $request->get('width') == null ? 200 : $request->get('width');
 			
 			// Load
             $thumb = imagecreatetruecolor($newwidth, $newheight);
