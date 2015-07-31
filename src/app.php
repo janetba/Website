@@ -47,7 +47,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 		    $file = $request->request->get('photoIndex');  
 			$images = "http://{$app['aws.bucket']}.s3.amazonaws.com/" . $file;
 			
-		/* 	$result = $app['aws']->get('s3')->getObject(array(
+			$result = $app['aws']->get('s3')->getObject(array(
 							   'Bucket' => $app['aws.bucket'],
 							   'Key'    => $images
 								));
@@ -55,8 +55,6 @@ $app->match('/get', function (Request $request ) use ($app) {
 			if($images == null){
 				throw new \InvalidArgumentException('The key is not stored in the service.');
 			}
-		     */
-		    
 			
             ini_set('display_errors', 1);
             error_reporting(E_ALL); 
@@ -71,16 +69,16 @@ $app->match('/get', function (Request $request ) use ($app) {
             $thumb = imagecreatetruecolor($newwidth, $newheight);
 			$source = imagecreatefromjpeg($images);
 
-	 		//check which is greater height or width
+	 		// check which is greater height or width
 			if($newheight > $newwidth)
-			{//force to width
+			{// force to width
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newwidth, $width, $height);
 			}
 			else 
-			{//force to height
+			{// force to height
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height);
 			}
-			//header("Content-Type:image/jpeg");
+			header("Content-Type:image/jpeg");
 			$result = imagejpeg($thumb);
 			$images = 'data:image/jpg;base64,".base64_encode($result)."';
 
