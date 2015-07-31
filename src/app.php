@@ -42,11 +42,10 @@ $app->match('/get', function (Request $request ) use ($app) {
 	
 	 $newheight = $request->get('nheight');
 	 $newwidth = $request->get('nwidth');
-	 echo $newheight;
+echo  "$newheight  weight";
 		
 	if('POST' == $request->getMethod())
 	{ 
-       
 		$images = null;
 		try{
 		    $file = $request->request->get('photoIndex');  
