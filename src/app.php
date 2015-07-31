@@ -40,10 +40,6 @@ $app->match('/', function () use ($app) {
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
 	
-	 /* $newheight = $request->get('nheight');
-	 $newwidth = $request->get('nwidth');
-echo  "$newheight  weight";
-		 */
 	if('POST' == $request->getMethod())
 	{ 
 		try{
@@ -53,20 +49,12 @@ echo  "$newheight  weight";
             ini_set('display_errors', 1);
             error_reporting(E_ALL); 
 			
-			global $newheight, $newwidth;
-			
-	        echo "h: $newheight   w: $newwidth";
-			if($newheight == null){
-				$newheight = 200;
-			}
-			if($newwidth == null){
-				$newwidth = 200;
-			}
-			   
+			$newheight = 200;
+			$newwidth = 200;
+		
 			// Get new sizes
              list($width, $height) = getimagesize($images);
 			 
-			//echo "height: $newheight   width: $newwidth";
 			// Load
             $thumb = imagecreatetruecolor($newwidth, $newheight);
 			$source = imagecreatefromjpeg($images);
