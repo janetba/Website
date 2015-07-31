@@ -39,8 +39,17 @@ $app->match('/', function () use ($app) {
     return $app['twig']->render('start.twig');
 });
 
+//Initial get
+$app->match('/get/', function (Request $request) use ($app) {
+
+	return $app['twig']->render('index.twig', array(
+			'title'  => 'My Photos',
+			'images' => $images,
+		)); 
+}
+
 // Handle the index/list page
-$app->match('/get', function (Request $request) use ($app) {
+$app->match('/get/{length}', function (Request $request) use ($app) {
 	
 	 /** @var Router $router */
     //$router = $this->get('router');
@@ -83,13 +92,7 @@ $app->match('/get', function (Request $request) use ($app) {
 			//header("Content-Type:image/jpeg");
 			$result = imagejpeg($thumb);
 			$images = 'data:image/jpg;base64,".base64_encode($result)."';
-            
-			//echo "<img src='data:image/jpg;base64,".base64_encode($result)."' />";
-			
-			return $app['twig']->render('inex.twig', array(
-			'title'  => 'My Photos',
-			'images' => $images,
-            ));
+
 		}
 		catch (Exception $e) {
             // Display an error message
