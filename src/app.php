@@ -65,11 +65,11 @@ $app->match('/get', function (Request $request ) use ($app) {
 			$newheight = 200; 
 			$newwidth = 200;
 			
-			if($request->get('height') == null){
+			if($request->get('height') != null){
 				$request->get('height');
 			}
 			
-			if($request->get('width') == null){
+			if($request->get('width') != null){
 				$request->get('width');
 			}
 			echo "height: $newheight   width: $newwidth";
