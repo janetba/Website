@@ -44,6 +44,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 	{ 
         $newheight = $request->get('nheight');
 	    $newwidth = $request->get('nwidth');
+		echo $newheight;
 		$images = null;
 		try{
 		    $file = $request->request->get('photoIndex');  
