@@ -64,14 +64,14 @@ $app->match('/get', function (Request $request ) use ($app) {
 			
 			// Get new sizes
              list($width, $height) = getimagesize($images);
-	        
+	        echo "height: $newheight   width: $newwidth";
 			if($newheight == null){
 				$newheight = 200;
 			}
 			if($newwidth == null){
 				$newwidth = 200;
 			}
-			
+			 
 			echo "height: $newheight   width: $newwidth";
 			// Load
             $thumb = imagecreatetruecolor($newwidth, $newheight);
