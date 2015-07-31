@@ -40,12 +40,9 @@ $app->match('/', function () use ($app) {
 });
 
 // Initial get
-$app->match('/getstart', function (Request $request) use ($app) {
+$app->match('/getstart', function () use ($app) {
 
-	return $app['twig']->render('index.twig', array(
-			'title'  => 'My Photos',
-			'images' => $images,
-		)); 
+	return $app['twig']->render('index.twig', array()); 
 }
 
 // Handle the index/list page
