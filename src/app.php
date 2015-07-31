@@ -79,8 +79,7 @@ $app->match('/get', function (Request $request ) use ($app) {
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newheight, $newheight, $width, $height);
 			}
 			header("Content-Type:image/jpeg");
-			$result = imagejpeg($thumb);
-			$images = 'data:image/jpg;base64,".base64_encode($result)."';
+			imagejpeg($thumb);
 
 		}
 		catch (Exception $e) {
@@ -88,13 +87,9 @@ $app->match('/get', function (Request $request ) use ($app) {
             echo "there was an exception $e";
         }
 	}
-	else
-	{
-		return $app['twig']->render('index.twig', array(
-			'title'  => 'My Photos',
-			'images' => $images,
-		));  
-	}
+
+	return $app['twig']->render('index.twig', array());  
+
 });
 
 // Handle the add/upload page
