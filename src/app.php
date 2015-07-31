@@ -40,10 +40,10 @@ $app->match('/', function () use ($app) {
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
 	
-	 $newheight = $request->get('nheight');
+	 /* $newheight = $request->get('nheight');
 	 $newwidth = $request->get('nwidth');
 echo  "$newheight  weight";
-		
+		 */
 	if('POST' == $request->getMethod())
 	{ 
 		try{
@@ -64,7 +64,7 @@ echo  "$newheight  weight";
 			}
 			   
 			// Get new sizes
-           /*   list($width, $height) = getimagesize($images);
+             list($width, $height) = getimagesize($images);
 			 
 			//echo "height: $newheight   width: $newwidth";
 			// Load
@@ -83,7 +83,7 @@ echo  "$newheight  weight";
 			}
 			
 			header('Content-Type: image/jpeg');
-			imagejpeg($thumb); */
+			imagejpeg($thumb);
 
 		}
 		catch (Exception $e) {
