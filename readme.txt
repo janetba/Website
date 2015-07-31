@@ -32,7 +32,11 @@ that name, with the option of entering url parameters for resizing the image.
 If no parameters are enetered then the image will be resized to 200 by 200. 
 If the length and with parameters are set in the url then the image will be 
 resized to that. To add parameters in the url the user simply needs to add
-?length=100&width=399. When the user presses sumbmit then a couple of things happen. 
+?nheight=100&nwidth=399. When the user presses sumbmit then a couple of things happen. 
+
+That portion of the service doesn't work, I was bussy this week and couldn't
+finish up the paramater passing to the twig file from the controller in app.
+It is currently set to 200 so all images requested are going to be dispalyed in 200 by 200.
 
 One if the file is not present in the bucket then the user will be notified. 
 If the file is present, the image will be resized appropiately and displayed. 
