@@ -39,7 +39,10 @@ $app->match('/', function () use ($app) {
 
 // Handle the index/list page
 $app->match('/get', function (Request $request ) use ($app) {
-	echo $request->get('nheight');
+	
+    $newheight = $request->get('nheight');
+	$newwidth = $request->get('nwidth');
+	
 	if('POST' == $request->getMethod())
 	{
 		$images = null;
@@ -62,17 +65,14 @@ $app->match('/get', function (Request $request ) use ($app) {
 			// Get new sizes
              list($width, $height) = getimagesize($images);
 	        
-			$newheight = 200; 
-			$newwidth = 200;
-			//echo $request->get('nheight');
-			/* if($request->get('nheight') != null){
-				$newheight = $request->get('nheight');
+			if($newheight == null){
+				$newheight = 200;
+			}
+			if($newwidth == null){
+				$newwidth = 200;
 			}
 			
-			if($request->get('nwidth') != null){
-				$newwidth = $request->get('nwidth');
-			}
-			echo "height: $newheight   width: $newwidth"; */
+			echo "height: $newheight   width: $newwidth";
 			// Load
             $thumb = imagecreatetruecolor($newwidth, $newheight);
 			$source = imagecreatefromjpeg($images);
